@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Controller, useForm } from "react-hook-form"
 import * as yup from 'yup';
 import Navbar from "../../components/navbar";
@@ -7,37 +7,7 @@ import { ArrowBack, Save } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { Supplier, SupplierCategory } from "../../models";
 import { SupplierService } from "../../services/supplier.service";
-
-const useYupValidationResolver = (validationSchema) =>
-    useCallback(
-      async (data) => {
-        try {
-          const values = await validationSchema.validate(data, {
-            abortEarly: false,
-          })
-  
-          return {
-            values,
-            errors: {},
-          }
-        } catch (errors) {
-          return {
-            values: {},
-            errors: errors.inner.reduce(
-              (allErrors, currentError) => ({
-                ...allErrors,
-                [currentError.path]: {
-                  type: currentError.type ?? "validation",
-                  message: currentError.message,
-                },
-              }),
-              {}
-            ),
-          }
-        }
-      },
-      [validationSchema]
-    )
+import useYupValidationResolver from "../../helpers/yupValidationResolver";
 
 const schema = yup.object({
     name: yup.string().required('Nome é obrigatório'),

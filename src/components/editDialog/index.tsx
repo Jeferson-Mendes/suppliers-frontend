@@ -1,40 +1,11 @@
-import { Fragment, ReactNode, useCallback, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Fragment, ReactNode, useState } from "react";
 import { Button, Card, CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { Supplier, SupplierCategory } from "../../models";
 import { SupplierService } from "../../services/supplier.service";
-
-const useYupValidationResolver = (validationSchema) =>
-    useCallback(
-      async (data) => {
-        try {
-          const values = await validationSchema.validate(data, {
-            abortEarly: false,
-          })
-  
-          return {
-            values,
-            errors: {},
-          }
-        } catch (errors) {
-          return {
-            values: {},
-            errors: errors.inner.reduce(
-              (allErrors: any, currentError: { path: any; type: any; message: any; }) => ({
-                ...allErrors,
-                [currentError.path]: {
-                  type: currentError.type ?? "validation",
-                  message: currentError.message,
-                },
-              }),
-              {}
-            ),
-          }
-        }
-      },
-      [validationSchema]
-    )
+import useYupValidationResolver from "../../helpers/yupValidationResolver";
 
 const schema = yup.object({
     name: yup.string().required('Nome é obrigatório'),
