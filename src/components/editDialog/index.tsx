@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { Supplier, SupplierCategory } from "../../models";
 import { SupplierService } from "../../services/supplier.service";
 import useYupValidationResolver from "../../helpers/yupValidationResolver";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
     name: yup.string().required('Nome é obrigatório'),
@@ -40,6 +41,8 @@ export const EditDialog: React.FC<Props> = ({ handleClose, open, supplierId, sup
         }
     })
 
+    const navigate = useNavigate();
+
     const onSubmit = async (data: Supplier) => {
         setIsLoading(true)
 
@@ -49,7 +52,7 @@ export const EditDialog: React.FC<Props> = ({ handleClose, open, supplierId, sup
 
         setIsLoading(false)
         handleClose()
-        window.location.reload();
+        navigate('/')
     }
 
   return (
