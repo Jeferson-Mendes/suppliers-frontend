@@ -2,7 +2,7 @@ import { Fragment, ReactNode, useCallback, useState } from "react";
 import { Button, Card, CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from 'yup';
-import { Supplier } from "../../models";
+import { Supplier, SupplierCategory } from "../../models";
 import { SupplierService } from "../../services/supplier.service";
 
 const useYupValidationResolver = (validationSchema) =>
@@ -61,7 +61,7 @@ export const EditDialog: React.FC<Props> = ({ handleClose, open, supplierId, sup
         resolver: useYupValidationResolver(schema),
         defaultValues: {
             name: supplier.name,
-            description: 'description test',
+            description: supplier.description,
             category: supplier.category,
             fullAddress: supplier.fullAddress,
             phoneNumber: supplier.phoneNumber,
@@ -141,9 +141,9 @@ export const EditDialog: React.FC<Props> = ({ handleClose, open, supplierId, sup
                                           label="Category"
                                           value={field.value || ''}
                                         >
-                                          <MenuItem value="Categoria 1">Categoria 1</MenuItem>
-                                          <MenuItem value="Categoria 2">Categoria 2</MenuItem>
-                                          <MenuItem value="Categoria 3">Categoria 3</MenuItem>
+                                          { Object.entries(SupplierCategory).map(item => (
+                                            <MenuItem key={item[0]} value={item[0]}>{ item[1] }</MenuItem>
+                                          ))  }
                                         </Select>
                                         {errors.category && <Typography variant="body2" color="error">{errors.category.message as ReactNode}</Typography>}
                                       </FormControl>

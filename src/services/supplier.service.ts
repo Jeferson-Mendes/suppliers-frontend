@@ -1,11 +1,15 @@
 import { Supplier } from "../models";
 import api from "./api";
 
-
+export type GetSuppliers = { 
+    page: number
+    size: number
+    searchTerm: string
+}
 export class SupplierService {
-    async getSuppliers(): Promise<Supplier[]> {
+    async getSuppliers({ page, searchTerm, size }: GetSuppliers): Promise<Supplier[]> {
         
-        const response = await api.get('/supplier')
+        const response = await api.get(`/supplier?page=${page}&size=${size}&searchTerm=${searchTerm}`)
         return response.data
     }
 

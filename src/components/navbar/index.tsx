@@ -13,9 +13,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
 const pages = [
-  {title: 'Início', isActive: true, to: '/'},
-  {title: 'Novo Fornecedor', isActive: false, to: 'fornecedor/novo'},
-  // {title: 'Sobre', isActive: false}
+  {title: 'Início', to: '/'},
+  {title: 'Novo Fornecedor', to: '/fornecedor/novo'},
 ];
 
 function Navbar() {

@@ -1,5 +1,5 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardMedia, Chip, Typography } from "@mui/material"
-import { Supplier } from "../../models"
+import { Supplier, SupplierCategory } from "../../models"
 import { useNavigate } from "react-router-dom"
 
 type Prop = {
@@ -27,7 +27,7 @@ export const SupplierCard = ({ supplier }: Prop) => {
         />
         <Avatar
             alt="Remy Sharp"
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://plus.unsplash.com/premium_vector-1682305614044-9802fc1f0edd?bg=FFFFFF&q=80&w=1800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             sx={{ position: 'relative', top: -20, left: 20, width: 60, height: 60 }}
         />
 
@@ -48,12 +48,12 @@ export const SupplierCard = ({ supplier }: Prop) => {
             }}
             >
                 <Typography variant="body1" color="text.secondary">
-                {supplier.email}
+                {supplier.description}
                 </Typography>
             </div>
         </CardContent>
         <CardContent sx={{ margin: 0, padding: 1 }}>
-            <Chip label={supplier.category}/>
+            <Chip label={SupplierCategory[supplier.category as never]}/>
         </CardContent>
         <CardActions>
             <Button
@@ -61,7 +61,7 @@ export const SupplierCard = ({ supplier }: Prop) => {
             color="inherit"
             fullWidth
             sx={{ 
-                extTransform: 'capitalize',
+                textTransform: 'capitalize',
                 color: 'var(--title-color)',
             }}
                 variant="outlined"

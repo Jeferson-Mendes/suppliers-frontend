@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { SupplierService } from "../../services/supplier.service";
-import { Supplier } from "../../models";
+import { Supplier, SupplierCategory } from "../../models";
 import Navbar from "../../components/navbar";
 import { Avatar, Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Typography } from "@mui/material";
 import { ArrowBack, Delete, Edit } from "@mui/icons-material";
@@ -12,6 +12,7 @@ export const SupplierDetails = () => {
     const [supplier, setSupplier] = useState<Supplier>({
         id: 0,
         name: '',
+        description: '',
         category: '',
         email: '',
         fullAddress: '',
@@ -82,7 +83,7 @@ export const SupplierDetails = () => {
                     />
                     <Avatar
                         alt="Remy Sharp"
-                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        src="https://plus.unsplash.com/premium_vector-1682305614044-9802fc1f0edd?bg=FFFFFF&q=80&w=1800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         sx={{ position: 'relative', top: -20, left: 20, width: 80, height: 80 }}
                     />
 
@@ -90,19 +91,21 @@ export const SupplierDetails = () => {
                         <Typography gutterBottom variant="h5" component="div">
                         {supplier?.name}
                         </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            {supplier?.description}
+                        </Typography>
                         <Typography gutterBottom variant="body1" color="text.secondary" component="div">
                         {supplier?.fullAddress}
                         </Typography>
                         <div>
                             <Typography variant="body1" color="text.secondary">
-                            {/* {supplier?.email} */}
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            {supplier?.email}
                             </Typography>
                         </div>
                     </CardContent>
 
                     <CardContent>
-                        <Chip label={supplier?.category}/>
+                        <Chip label={SupplierCategory[supplier.category as never]}/>
                     </CardContent>
 
                     <CardContent>
